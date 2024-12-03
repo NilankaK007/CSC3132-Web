@@ -9,7 +9,7 @@
 	<form action="addData.php" method="POST">
 		<table>
 			<tr>
-				<td align="right">Registration Number:</td>
+				<td align="right">Student Id:</td>
 				<td><input type="text" name="regno" /></td>
 			</tr>
 			<tr>
@@ -19,6 +19,14 @@
 			<tr>
 				<td align="right">Age:</td>
 				<td><input type="number" name="age" /></td>
+			</tr>
+            <tr>
+				<td align="right">Gender:</td>
+				<td><input type="number" name="gender" /></td>
+			</tr>
+            <tr>
+				<td align="right">Enrolment date:</td>
+				<td><input type="number" name="enrolment_date" /></td>
 			</tr>
 			<tr>
 				<td align="right">Course:</td>
@@ -38,10 +46,10 @@
 	</form>
 	<?php
 	require_once 'dbconf.php';
-	function AddData($connect,$reg,$name,$age,$course){
+	function AddData($connect,$id,$name,$age,$gender,$course,$enrolment_date){
 		try {
 		//Query
-			$sql = "INSERT INTO STUDENTS VALUES('$reg','$name',$age,'$course')";
+			$sql = "INSERT INTO STUDENTS VALUES('$id','$name',$age,'$gender','$course','$enrolment_date')";
 			//echo "$sql";
 		//excute the quey
 			$result = mysqli_query($connect,$sql);
@@ -58,11 +66,13 @@
 	
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		//echo "Got the POST request from client";
-		$reg = $_POST['regno'];
+		$id = $_POST['id'];
 		$name = $_POST['name'];
 		$age = $_POST['age'];
-		$course = $_POST['course'];
-		AddData($connect,$reg,$name,$age,$course);
+        $gender=$_POST['gender'];
+        $course = $_POST['course'];
+		$enrolment_date = $_POST['enrolment_date'];
+		AddData($connect,$id,$name,$age,$gender,$course,$enrolment_date);
 	}
 	
 
